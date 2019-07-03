@@ -1,0 +1,27 @@
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+html, body {
+
+  font-family: 'Times New Roman', Times, serif;
+
+  margin: 0;
+  padding: 0;
+
+  --small-size-font: 14px;
+  --medium-size-font: 16px;
+  --big-size-font: 25px;
+
+  --border-radius: 4px;
+
+  --box-shadow-values: 1px 2px 4px 0px rgb(175, 174, 174);
+
+
+
+
+
+}
+* {
+  margin: 0;
+  padding: 0;
+}
+

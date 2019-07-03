@@ -1,0 +1,13 @@
+<div [formGroup]="quertFieldGroup">
+  <div *ngFor="let item of keys_types">
+    <app-input
+      [group]="quertFieldGroup"
+      [controlName]=item.key
+      [placeHolder]=item.key
+      [type]=item.type
+      [value]="''">
+    </app-input>
+  </div>
+</div>
+
+

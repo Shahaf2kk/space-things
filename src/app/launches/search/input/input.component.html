@@ -1,0 +1,39 @@
+<div [formGroup]="group" >
+  <div class="input-title">
+    <span>{{ type === 'string' || type === 'Number' || type === 'Date' ? 'Choose ' : 'Has ' }}</span>
+    <span>{{ controlName | searchTitle }}</span>
+    <span>{{ type === 'string' || type === 'Number' || type === 'Date' ? ':' : '?' }}</span>
+  </div>
+  <input
+    *ngIf="type === 'string'"
+    [type]="'text'"
+    [value]="value"
+    [formControlName]="controlName"
+    [placeholder]="placeHolder">
+
+    <input
+    *ngIf="type === 'boolean'"
+    [type]="'checkbox'"
+    [checked]="value"
+    [formControlName]="controlName"
+    [placeholder]="placeHolder">
+
+    <input
+    *ngIf="type === 'Number'"
+    [type]="type"
+    [checked]="value"
+    [formControlName]="controlName"
+    [placeholder]="placeHolder">
+
+    <input
+    *ngIf="type === 'Date'"
+    [type]="'date'"
+    [formControlName]="controlName"
+    [placeholder]="placeHolder">
+
+  </div>
+  <!-- " -->
+<!-- <div [formGroup]="group" *ngIf="type === 'checkbox'">
+
+</div> -->
+  <!-- [checked]="false" -->

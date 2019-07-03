@@ -1,0 +1,9 @@
+
+<app-search></app-search>
+<br>
+<div class="launches">
+  <div *ngFor="let launche of launches | search: resultSearchLaunches : keys">
+    <app-launche [launche]="launche" [preview]=true></app-launche>
+  </div>
+</div>
+

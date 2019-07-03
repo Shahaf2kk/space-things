@@ -1,0 +1,32 @@
+.launch-container {
+  margin: 2px 3px 4px 3px;
+
+  display: flex;
+  flex-direction: column;
+
+  border: 1px solid black;
+  padding: 5px;
+
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow-values);
+}
+.launch-date {
+  font-size: var(--small-size-font);
+
+}
+
+.mission-name {
+  font-size: var(--big-size-font);
+}
+
+.mission-status {
+  text-align: right;
+  font-size: var(--small-size-font);
+}
+
+.mission-success {
+  color: green;
+}
+.mission-faild {
+  color: red;
+}
