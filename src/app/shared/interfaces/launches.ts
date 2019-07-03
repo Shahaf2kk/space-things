@@ -1,5 +1,11 @@
 import { IRocket } from './rocket';
 
+export interface IKeys_Types {
+  key: string;
+  type: string;
+  default_value: any;
+}
+
 export interface ILaunche {
   flight_number: number;
   mission_name: string;

@@ -5,9 +5,10 @@
       [controlName]=item.key
       [placeHolder]=item.key
       [type]=item.type
-      [value]="''">
+      [value]="item.default_value">
     </app-input>
   </div>
+  <button (click)="resetValues()">reset</button>
 </div>
 
 

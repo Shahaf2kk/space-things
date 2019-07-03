@@ -2,7 +2,8 @@
 <app-search></app-search>
 <br>
 <div class="launches">
-  <div *ngFor="let launche of launches | search: resultSearchLaunches : keys">
+  <div *ngFor="let launche of launches | search: resultSearchLaunches : keys_types; let i = index">
+    <span>{{i}}</span>
     <app-launche [launche]="launche" [preview]=true></app-launche>
   </div>
 </div>

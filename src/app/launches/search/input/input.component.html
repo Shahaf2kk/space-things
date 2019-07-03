@@ -14,7 +14,9 @@
     <input
     *ngIf="type === 'boolean'"
     [type]="'checkbox'"
-    [checked]="value"
+    [checked]="value == true ? true : false"
+    [value]="value != true ? true : false"
+    (change)="value = !value"
     [formControlName]="controlName"
     [placeholder]="placeHolder">
 
@@ -33,6 +35,8 @@
 
   </div>
   <!-- " -->
+  <!-- [ngModel]="myDate | date: 'yyyy'" -->
+  <!-- (ngModelChange)="date | date: 'y'" -->
 <!-- <div [formGroup]="group" *ngIf="type === 'checkbox'">
 
 </div> -->

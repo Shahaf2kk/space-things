@@ -1,43 +1,34 @@
-import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import { SearchComponent } from './../search.component';
+import { Component, OnInit, Input, AfterViewInit, Host } from '@angular/core';
 
 @Component({
   selector: 'app-input',
   templateUrl: './input.component.html',
   styleUrls: ['./input.component.css']
 })
-export class InputComponent implements OnInit, OnChanges{
+export class InputComponent implements OnInit, AfterViewInit {
 
   @Input() controlName: string;
   @Input() placeHolder: string;
   @Input() group: string;
   @Input() value: any;
   @Input() type: string;
+  myDate: number;
 
-  constructor() { }
+  constructor(
+    ) { }
 
-  ngOnChanges() {
-    // this.changeType();
-  }
   ngOnInit() {
   }
+  ngAfterViewInit() {
 
-  changeValue(_value: any) {
-    this.value = _value;
   }
 
-  // changeType() {
-
-  //   const cn = this.controlName;
-  //   if(cn == 'launch_success' || cn == 'crew') {
-  //     this.type = 'checkbox';
-  //     this.value = false;
-
-  //   } else if(cn == 'flight_number') {
-  //     this.type = 'number';
-  //   } else {
-  //     this.type = 'text';
+  // changeTime() {
+  //   if(this.type === 'Date') {
+  //     this.myDate = new Date('2016').getFullYear();
+  //     console.log(this.myDate);
   //   }
-
   // }
 }
 

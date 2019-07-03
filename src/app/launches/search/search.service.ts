@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { IKeys_Types } from 'src/app/shared/interfaces/launches';
 
 @Injectable({
   providedIn: 'root'
@@ -10,15 +11,12 @@ export class SearchService {
     this.initKeys();
   }
 
-  keys_types: {
-    key: string,
-    type: string
-  }[];
+  keys_types: IKeys_Types[];
 
   keys: Array<string> = [];
   types: Array<string> = [];
 
-  getKeys_types(): Array<{key: string; type: string}> {
+  getKeys_types(): IKeys_Types[] {
     return this.keys_types;
   }
 
@@ -44,36 +42,43 @@ export class SearchService {
 
 
 
-  private chooseKeys() {
+  private chooseKeys(): IKeys_Types[] {
     return [
       {
         key: 'flight_number',
-        type: 'Number'
+        type: 'Number',
+        default_value: null
       },
       {
         key: 'mission_name',
-        type: 'string'
+        type: 'string',
+        default_value: null
       },
       {
         key: 'upcoming',
-        type: 'boolean'
+        type: 'boolean',
+        default_value: false,
       },
       {
         key: 'launch_year',
-        type: 'Date'
+        type: 'Date',
+        default_value: null
       },
       {
         key: 'launch_success',
-        type: 'boolean'
+        type: 'boolean',
+        default_value: false
       },
       {
         key: 'links',
-        type: 'boolean'
+        type: 'boolean',
+        default_value: false
       },
-      {
-        key: 'crew',
-        type: 'boolean'
-      },
+      // {
+      //   key: 'crew',
+      //   type: 'boolean',
+      //   default_value: false
+      // },
     ];
   }
 }

@@ -19,7 +19,6 @@ export class SearchComponent implements OnInit {
   quertFieldGroup: FormGroup;
 
   keys_types: Array<any>
-
   keys: Array<string>;
   types: Array<string>;
 
@@ -33,18 +32,6 @@ export class SearchComponent implements OnInit {
     // this.keys = this.searchService.initKeys();
   }
 
-  // initKeys() {
-  //   this.keys_types = this.searchService.initKeys();
-  //   this.keys_types.forEach(key => {
-  //     this.keys.push(key.key);
-  //     this.types.push(key.type);
-  //   });
-  // }
-
-
-
-
-
   addControlls(keys: Array<any>) {
     keys.forEach( el => {
         this.quertFieldGroup.addControl(el, this.createControl());
@@ -54,6 +41,10 @@ export class SearchComponent implements OnInit {
 
   createControl(): FormControl {
     return new FormControl();
+  }
+
+  resetValues() {
+    this.quertFieldGroup.reset();
   }
 
 }

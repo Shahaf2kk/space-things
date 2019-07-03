@@ -1,10 +1,11 @@
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit, AfterViewChecked } from '@angular/core';
 
 import { SearchComponent } from './../search/search.component';
 
 import { LaunchesService } from './../launches.service';
 import { Launche } from 'src/app/shared/model/launche';
 import { SearchService } from '../search/search.service';
+import { IKeys_Types } from 'src/app/shared/interfaces/launches';
 
 
 @Component({
@@ -24,12 +25,14 @@ export class LauncheListComponent implements OnInit, AfterViewInit {
   launches: Launche[];
   resultSearchLaunches: Launche;
   keys: string[];
+  keys_types: IKeys_Types[];
 
 
 
   ngOnInit() {
     this.loadLaunches();
     this.keys = this.searchService.getKeys();
+    this.keys_types = this.searchService.getKeys_types();
   }
 
   ngAfterViewInit(): void {
@@ -50,12 +53,13 @@ export class LauncheListComponent implements OnInit, AfterViewInit {
   showSearchRes() {
     this.searchRes.quertFieldGroup.valueChanges.subscribe((res: Launche) => {
       console.log(res);
-      if(this.findSearchResultHasValues(res)) {
-        this.resultSearchLaunches = res;
-      } else this.resultSearchLaunches = null;
+      this.resultSearchLaunches = res;
+      // if(this.findSearchResultHasValues(res)) {
+      // } else this.resultSearchLaunches = null;
     });
   }
 
+  // for skip the pipe in the entry if has no value.
   findSearchResultHasValues(res: Launche): boolean {
 
     for (let i  = 0; i < this.searchRes.keys.length; i++) {

@@ -1,6 +1,8 @@
+import { IKeys_Types } from 'src/app/shared/interfaces/launches';
 import { Pipe, PipeTransform } from '@angular/core';
 
 import { Launche } from './../model/launche';
+import { isNull } from 'util';
 
 @Pipe({
   name: 'search'
@@ -8,7 +10,7 @@ import { Launche } from './../model/launche';
 
 export class SearchPipe implements PipeTransform {
 
-  transform(launcheValue: Launche[], launcheSearch?: Launche, keys?: Array<any>): any {
+  transform(launcheValue: Launche[], launcheSearch?: Launche, keys?: IKeys_Types[]): any {
     if(!launcheSearch || !keys) return launcheValue;
 
     let result: Launche[] = [];
@@ -30,28 +32,93 @@ export class SearchPipe implements PipeTransform {
 
 
 
-      let key_includes = 0;
+      let key_match = true;
 
-      keys.forEach(key_name => {
-        if(key_name == 'flight_number') return;
+      for (let i = 0; i < keys.length; i++) {
+        const key = keys[i];
+        if(key.key === 'flight_number') continue;
 
-        let _value: any = el_value[key_name];
-        let _search: any = launcheSearch[key_name];
+        let _value: any = el_value[key.key];
+        let _search: any = launcheSearch[key.key];
+        if(_search === null || _search === undefined || _search === '') continue;
+
+        if(key.type === 'string') {
+
+
+          _value = _value.toLowerCase();
+          _search = _search.toLowerCase();
+          if(_value.includes(_search)) {
+            continue;
+          } else {
+            key_match = false;
+          }
+        }
+        // boolean types
+        else if(key.type === 'boolean') {
+          _search = _search === 'true' ? true : false;
+
+          if(key.key === 'links') {
+
+            if(_value.article_link == null && !_search || _value.article_link != null && _search) continue;
+            else key_match = false;
+
+          }
+
+          // if(key.key === 'crew') {
+          //   // console.log(isNull(_value));
+          //   // console.log(_value, _search);
+          //   if(isNull(_value.crew) && !_search || !isNull(_value.crew) && _search) {
+          //     if(_value.crew.length > 0) continue;
+          //   }
+          //   else key_match = false;
+
+          // }
+          if(_search === _value) {
+            continue;
+          } else {
+            key_match = false;
+          }
+        }
+
+        else if(key.type === 'Date') {
+          console.log(_value, _search);
+        }
+
+
+      }
+      // keys.forEach(key_name => {
+      //   if(key_name.key === 'flight_number') return;
+
+
+        // console.log(_value, _search);
 
         // if(!isNaN(_value) || !isNaN(_search)) return; //   retrun if is number
-        if(_value == null || _value == undefined || _value == null) return;
-        if(_search == '' || _search == null || _search == undefined || _search == ' ') return;
+        // if(_search == '' || _search == null || _search == undefined || _search == ' ') return;
 
-        _value = _value.toLowerCase();
-        _search = _search.toLowerCase();
+        // strings
+        // if(key_name.type === 'string') {
+        //   if(_search == null || _search == undefined) return;
+        //   // if(_value == null || _value == undefined || _value == null ||
+
+        //   _value = _value.toLowerCase();
+        //   _search = _search.toLowerCase();
+        //   if(!_value.includes(_search)) {
+        //     key_match = false;
+        //   }
+
+        // }
+        // boolean
+        // else if(key_name.type === 'boolean') {
+        //   // _search = Boolean(_search);/
+        //   console.log(_search == _value);
+        //   if(_search != _value) return;
+        // }
+          // console.log(key_name.key, _value, _search);
 
 
-        if(!_value.includes(_search)) return;
+      // });
 
-        key_includes++;
-      });
-
-      if(key_includes > 0) result.push(el_value);
+      if(key_match) result.push(el_value);
     }
 
     return result;
