@@ -11,7 +11,7 @@ import { isNull } from 'util';
 export class SearchPipe implements PipeTransform {
 
   transform(launcheValue: Launche[], launcheSearch?: Launche, keys?: IKeys_Types[]): any {
-    if(!launcheSearch || !keys) return launcheValue;
+    if(!launcheSearch || !keys || !launcheValue) return launcheValue;
 
     let result: Launche[] = [];
 
@@ -36,22 +36,21 @@ export class SearchPipe implements PipeTransform {
 
       for (let i = 0; i < keys.length; i++) {
         const key = keys[i];
-        if(key.key === 'flight_number') continue;
 
         let _value: any = el_value[key.key];
         let _search: any = launcheSearch[key.key];
+
+        if(key.key === 'flight_number') continue;
         if(_search === null || _search === undefined || _search === '') continue;
 
         if(key.type === 'string') {
 
-
           _value = _value.toLowerCase();
           _search = _search.toLowerCase();
-          if(_value.includes(_search)) {
-            continue;
-          } else {
-            key_match = false;
-          }
+
+          if(_value.includes(_search)) continue;
+          else key_match = false;
+
         }
         // boolean types
         else if(key.type === 'boolean') {
@@ -63,63 +62,18 @@ export class SearchPipe implements PipeTransform {
             else key_match = false;
 
           }
-
-          // if(key.key === 'crew') {
-          //   // console.log(isNull(_value));
-          //   // console.log(_value, _search);
-          //   if(isNull(_value.crew) && !_search || !isNull(_value.crew) && _search) {
-          //     if(_value.crew.length > 0) continue;
-          //   }
-          //   else key_match = false;
-
-          // }
-          if(_search === _value) {
-            continue;
-          } else {
-            key_match = false;
-          }
         }
+        // rocket id
+        else if(key.key === 'rocket') {
 
-        else if(key.type === 'Date') {
-          console.log(_value, _search);
+            if(_value.rocket_id == _search) continue;
+            else key_match = false;
         }
-
-
       }
-      // keys.forEach(key_name => {
-      //   if(key_name.key === 'flight_number') return;
-
-
-        // console.log(_value, _search);
-
-        // if(!isNaN(_value) || !isNaN(_search)) return; //   retrun if is number
-        // if(_search == '' || _search == null || _search == undefined || _search == ' ') return;
-
-        // strings
-        // if(key_name.type === 'string') {
-        //   if(_search == null || _search == undefined) return;
-        //   // if(_value == null || _value == undefined || _value == null ||
-
-        //   _value = _value.toLowerCase();
-        //   _search = _search.toLowerCase();
-        //   if(!_value.includes(_search)) {
-        //     key_match = false;
-        //   }
-
-        // }
-        // boolean
-        // else if(key_name.type === 'boolean') {
-        //   // _search = Boolean(_search);/
-        //   console.log(_search == _value);
-        //   if(_search != _value) return;
-        // }
-          // console.log(key_name.key, _value, _search);
-
-
-      // });
 
       if(key_match) result.push(el_value);
     }
+
 
     return result;
   }

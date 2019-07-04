@@ -1,15 +1,16 @@
 <div [formGroup]="group" >
   <div class="input-title">
-    <span>{{ type === 'string' || type === 'Number' || type === 'Date' ? 'Choose ' : 'Has ' }}</span>
+    <span>{{ type === 'string' || type === 'Number' || type === 'Date' || type === 'select' ? 'Choose ' : 'Has ' }}</span>
     <span>{{ controlName | searchTitle }}</span>
-    <span>{{ type === 'string' || type === 'Number' || type === 'Date' ? ':' : '?' }}</span>
+    <span>{{ type === 'string' || type === 'Number' || type === 'Date' || type === 'select'  ? ':' : '?' }}</span>
   </div>
+
   <input
     *ngIf="type === 'string'"
     [type]="'text'"
     [value]="value"
     [formControlName]="controlName"
-    [placeholder]="placeHolder">
+    [placeholder]="'type ' + placeHolder | searchTitle">
 
     <input
     *ngIf="type === 'boolean'"
@@ -17,21 +18,31 @@
     [checked]="value == true ? true : false"
     [value]="value != true ? true : false"
     (change)="value = !value"
-    [formControlName]="controlName"
-    [placeholder]="placeHolder">
+    [formControlName]="controlName">
+    <!-- [placeholder]="'type ' + placeHolder | searchTitle"> -->
 
     <input
     *ngIf="type === 'Number'"
     [type]="type"
     [checked]="value"
     [formControlName]="controlName"
-    [placeholder]="placeHolder">
+    [placeholder]="'type ' + placeHolder | searchTitle">
 
     <input
     *ngIf="type === 'Date'"
     [type]="'date'"
-    [formControlName]="controlName"
-    [placeholder]="placeHolder">
+    [formControlName]="controlName">
+    <!-- [placeholder]="placeHolder"> -->
+
+    <mat-select
+      *ngIf="type === 'select'"
+      [formControlName]="controlName"
+      [placeholder]="'Choose ' + placeHolder | searchTitle">
+        <mat-option>-- None --</mat-option>
+        <mat-option *ngFor="let option of value" [value]="option.rocket_id">
+          {{ option.rocket_name | searchTitle }}
+        </mat-option>
+    </mat-select>
 
   </div>
   <!-- " -->

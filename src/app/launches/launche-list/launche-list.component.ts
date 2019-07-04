@@ -54,8 +54,8 @@ export class LauncheListComponent implements OnInit, AfterViewInit {
     this.searchRes.quertFieldGroup.valueChanges.subscribe((res: Launche) => {
       console.log(res);
       this.resultSearchLaunches = res;
-      // if(this.findSearchResultHasValues(res)) {
-      // } else this.resultSearchLaunches = null;
+      if(this.findSearchResultHasValues(res)) {
+      } else this.resultSearchLaunches = null;
     });
   }
 

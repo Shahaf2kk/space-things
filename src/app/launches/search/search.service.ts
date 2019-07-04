@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { IKeys_Types } from 'src/app/shared/interfaces/launches';
+import { SpacexApiCallsService } from 'src/app/shared/api-services/spacex-api-calls.service';
+import { Rocket } from 'src/app/shared/model/rocket';
 
 @Injectable({
   providedIn: 'root'
@@ -7,8 +9,9 @@ import { IKeys_Types } from 'src/app/shared/interfaces/launches';
 
 export class SearchService {
 
-  constructor() {
+  constructor(private spaceXApi: SpacexApiCallsService) {
     this.initKeys();
+    this.getRockets();
   }
 
   keys_types: IKeys_Types[];
@@ -28,6 +31,21 @@ export class SearchService {
     return this.types;
   }
 
+  getRockets() {
+    this.spaceXApi.getRockets().subscribe((data: Rocket[]) => {
+      this.initRocket(data);
+    }, error => console.log(error));
+  }
+
+  initRocket(rockets: Rocket[]) {
+    for (let i = 0; i < this.keys_types.length; i++) {
+      if(this.keys_types[i].key == 'rocket') {
+        this.keys_types[i].default_value = rockets;
+        return;
+      }
+
+    }
+  }
 
   private initKeys() {
 
@@ -74,6 +92,12 @@ export class SearchService {
         type: 'boolean',
         default_value: false
       },
+      {
+        key: 'rocket',
+        type: 'select',
+        default_value: []
+      }
+
       // {
       //   key: 'crew',
       //   type: 'boolean',

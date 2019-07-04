@@ -13,7 +13,6 @@ export class InputComponent implements OnInit, AfterViewInit {
   @Input() group: string;
   @Input() value: any;
   @Input() type: string;
-  myDate: number;
 
   constructor(
     ) { }
@@ -21,7 +20,6 @@ export class InputComponent implements OnInit, AfterViewInit {
   ngOnInit() {
   }
   ngAfterViewInit() {
-
   }
 
   // changeTime() {

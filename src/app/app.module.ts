@@ -12,6 +12,7 @@ import { Global } from './globals/global';
 // angular matirial
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatSelectModule } from '@angular/material/select';
 
 // modules
 import { AppRoutingModule } from './app-routing.module';
@@ -51,6 +52,7 @@ import { SearchTitlePipe } from './shared/pipe/search-title.pipe';
     BrowserAnimationsModule,
     ReactiveFormsModule,
     MatTabsModule,
+    MatSelectModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
