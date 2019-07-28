@@ -47,6 +47,7 @@ export class SearchService {
     }
   }
 
+
   private initKeys() {
 
     this.keys_types = this.chooseKeys();

@@ -33,6 +33,7 @@ import { LauncheLinksComponent } from './launches/launche/launche-links/launche-
 import { SearchComponent } from './launches/search/search.component';
 import { InputComponent } from './launches/search/input/input.component';
 import { SearchTitlePipe } from './shared/pipe/search-title.pipe';
+import { YoutubeVideosComponent } from './launches/launche/launche-links/youtube-videos/youtube-videos.component';
 
 
 @NgModule({
@@ -45,7 +46,8 @@ import { SearchTitlePipe } from './shared/pipe/search-title.pipe';
     SearchComponent,
     SearchPipe,
     InputComponent,
-    SearchTitlePipe
+    SearchTitlePipe,
+    YoutubeVideosComponent
   ],
   imports: [
     BrowserModule,

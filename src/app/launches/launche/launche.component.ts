@@ -1,16 +1,15 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input } from "@angular/core";
 
-import { Launche } from './../../shared/model/launche';
-import { LaunchesService } from './../launches.service';
+import { Launche } from "./../../shared/model/launche";
+import { LaunchesService } from "./../launches.service";
 
 @Component({
-  selector: 'app-launche',
-  templateUrl: './launche.component.html',
-  styleUrls: ['./launche.component.css']
+  selector: "app-launche",
+  templateUrl: "./launche.component.html",
+  styleUrls: ["./launche.component.css"]
 })
 export class LauncheComponent implements OnInit {
-
-  constructor() { }
+  constructor() {}
 
   @Input() launche: Launche;
 
@@ -20,17 +19,13 @@ export class LauncheComponent implements OnInit {
   launcheTime: Date;
 
   ngOnInit() {
-
     this.launcheTime = new Date(this.launche.launch_date_utc);
-
   }
   changePreview() {
     this.preview = !this.preview;
   }
 
-
-
-
-
-
+  rocketKey(): string[] {
+    return ["rocket_name", "rocket_type"];
+  }
 }

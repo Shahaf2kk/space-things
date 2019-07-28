@@ -28,6 +28,7 @@ export class Launche implements ILaunche {
   timeline: object;
   crew: object;
 
+
   createEmpty() {
     this.flight_number = null;
     this.mission_name = null;

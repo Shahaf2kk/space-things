@@ -1,41 +1,45 @@
-<div
-    class="launch-container">
+<div class="launch-container">
 
-  <span *ngIf="this.launche.upcoming">
-      Planned on
-  </span>
+    <span *ngIf="this.launche.upcoming">Planned on</span>
 
-  <span
-    class="launch-date">
-    {{ this.launche.launch_date_utc |  date:'medium' }}
-  </span>
+    <span class="launch-date">
+        {{ this.launche.launch_date_utc |  date:'medium' }}
+    </span>
 
-  <h1
-    class="mission-name">
-      Mission: {{ launche.mission_name }} </h1>
+    <h1 class="mission-name">Mission: {{ launche.mission_name }}</h1>
 
-  <div
-    *ngIf="!preview"
-    class="full-view">
+    <div
+        *ngIf="!preview"
+        class="full-view"
+    >
 
-    <div *ngIf="launche.details">
-      <h3>Mission Details:</h3>
-      <p> {{ launche.details }} </p>
+        <div *ngIf="launche.details">
+            <h3>Mission Details:</h3>
+            <p>{{ launche.details }}</p>
+        </div>
+        <div *ngIf="launche.rocket">
+            <ul>
+                <li *ngFor="let obj of rocketKey()">
+                    <span>{{ obj | searchTitle }}</span>
+                    <span>{{ launche[obj] }}</span>
+                </li>
+            </ul>
+        </div>
+
+        <app-launche-links
+            *ngIf="launche.links"
+            [links]="launche.links"
+        ></app-launche-links>
+
     </div>
 
-    <app-launche-links *ngIf="launche.links" [links]="launche.links"></app-launche-links>
-
-  </div>
-
-  <span
-      [ngClass]="launche.launch_success ? 'mission-success' : 'mission-faild'"
-      class="mission-status">
+    <span
+        [ngClass]="launche.launch_success ? 'mission-success' : 'mission-faild'"
+        class="mission-status"
+    >
         Mission {{ launche.launch_success ? 'Success' : 'Faild' }}!
-  </span>
+    </span>
 
-  <span (click)="changePreview()">more...</span>
+    <span (click)="changePreview()">more...</span>
 
 </div>
-
-
-
